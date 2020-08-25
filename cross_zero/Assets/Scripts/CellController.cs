@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class CellController : MonoBehaviour
 {
-    public Sprite cross;
-    public Sprite zero;
-
+        
     private void OnMouseDown()
     {
         CellModel.Instance.targetCell = gameObject;
@@ -19,17 +17,19 @@ public class CellController : MonoBehaviour
     {
         
         var spriteCell = CellModel.Instance.targetCell.GetComponent<SpriteRenderer>();
+        var checkTurnCell = GetComponent<Cell>();
 
-        if (CellModel.Instance.NumberPlayer == 1)
+        if (CellModel.Instance.NumberPlayer == 1 && checkTurnCell.CheckTurn==false )
         {
-            spriteCell.sprite = cross;
-            CellModel.Instance.PassTurn();
+            spriteCell.sprite = CellModel.Instance.cross;
+            CellModel.Instance.NumberPlayer = 2;
         }
-        else
+        else if(checkTurnCell.CheckTurn == false)
         {
-            spriteCell.sprite = zero;
-            CellModel.Instance.PassTurn();
+            spriteCell.sprite = CellModel.Instance.zero;
+            CellModel.Instance.NumberPlayer = 1;
         }
+        checkTurnCell.CheckTurn = true;
     }
 
 }
