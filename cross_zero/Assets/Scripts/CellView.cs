@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CellView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private CellController _cellController;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
+        _cellController = new CellController();
+    }
+    private void OnMouseDown()
+    {
+        CellModel.Instance.targetCell = gameObject;
+
+
+        _cellController.MakeMove();
+
         
+        //Debug.Log(_cellController.ClculateCellHorisontal());
+        //Debug.Log(_cellController.ClculateCellDiagonal());
     }
 }

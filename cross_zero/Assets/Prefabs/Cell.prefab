@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3234603079569830982}
   - component: {fileID: 3234603079569830843}
   - component: {fileID: 3234603079569830980}
-  - component: {fileID: 3234603079569830981}
+  - component: {fileID: 1199979016197473367}
   - component: {fileID: 1308433570098610731}
   m_Layer: 0
   m_Name: Cell
@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 3234603079569830983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,7 +115,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3234603079569830981
+--- !u!114 &1199979016197473367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,11 +124,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3234603079569830983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37cefcdfb1064254da839b84feef1e16, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c2665100051caa4dba659ce5e108e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cross: {fileID: 21300000, guid: 935e874bf3c1a4e478b5c467fc6696ea, type: 3}
-  zero: {fileID: 21300000, guid: af9283bf5d9e641488c2983455568a3f, type: 3}
 --- !u!114 &1308433570098610731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +139,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422f684e7a7114d4e8bf2b22a084e64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckTurn: 0
