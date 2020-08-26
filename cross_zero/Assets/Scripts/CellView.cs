@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class CellView : MonoBehaviour
 {
     private CellController _cellController;
 
-    private void Awake()
+    private void Start()
     {
         _cellController = new CellController();
     }
@@ -16,9 +17,10 @@ public class CellView : MonoBehaviour
 
 
         _cellController.MakeMove();
+        _cellController.DirectionsToWin();
 
+        Debug.Log("тык"); 
+       
         
-        //Debug.Log(_cellController.ClculateCellHorisontal());
-        //Debug.Log(_cellController.ClculateCellDiagonal());
     }
 }

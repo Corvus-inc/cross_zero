@@ -219,16 +219,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cross: {fileID: 21300000, guid: 2aee3ffbfbf89e445aa8aca3e8d8a9fe, type: 3}
   zero: {fileID: 21300000, guid: 0254692a87cca094c8ea1aedca799bea, type: 3}
+  row: 3
+  column: 3
+  zeroWinnes: 0
+  crosswWinnes: 0
   targetCell: {fileID: 0}
-  numberPlayer: 1
+  numberNextPlayer: 1
   screenCanvas: {fileID: 430746103}
   textTurns: {fileID: 1605640955}
+  textZero: {fileID: 1553294400}
+  textCross: {fileID: 1321435865}
   SinpleLine: {fileID: 7600593023297297876, guid: e161bac514f0e844ab7632ca2d96953a,
     type: 3}
   PrefabCell: {fileID: 3234603079569830983, guid: dbb5841df59bf374aa0773f1830f2501,
     type: 3}
   GridCells: {fileID: 481323321}
-  allCells: []
 --- !u!1 &375994793
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +315,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 375994796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 481323326}
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &375994796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +574,7 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 1, y: 1}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 1
+  m_Constraint: 0
   m_ConstraintCount: 3
 --- !u!224 &481323325
 RectTransform:
@@ -1003,7 +1019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -89.5}
+  m_AnchoredPosition: {x: 0, y: -105.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1605640955
@@ -1019,7 +1035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0, b: 0.005499219, a: 1}
+  m_Color: {r: 0.5566038, g: 0.023629395, b: 0.027436443, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
