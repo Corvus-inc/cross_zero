@@ -14,13 +14,12 @@ public class CellView : MonoBehaviour
     private void OnMouseDown()
     {
         CellModel.Instance.targetCell = gameObject;
-
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
         _cellController.MakeMove();
         _cellController.DirectionsToWin();
-
-        Debug.Log("тык"); 
-       
+        _cellController.CountingOfMoves();
         
+        Debug.Log("тык"); 
     }
 }

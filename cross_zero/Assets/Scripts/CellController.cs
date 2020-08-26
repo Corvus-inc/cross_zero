@@ -14,6 +14,7 @@ public class CellController : MonoBehaviour
     private int row;
     private int column;
 
+
     //private void OnMouseDown()
     //{
     //    CellModel.Instance.targetCell = gameObject;
@@ -27,9 +28,15 @@ public class CellController : MonoBehaviour
     {
         row = CellModel.Instance.row;
         column = CellModel.Instance.column;
+
+        CellModel.Instance.numOfMoves = row * column;
+        CellModel.Instance.countingOfMoves = 0;
+        CellModel.Instance.dontWin = true;
+
         CreateAllCells(row, column);
         SetTurnText(CellModel.Instance.numberNextPlayer);
-       
+
+
     }
 
     public void MakeMove()
@@ -45,7 +52,6 @@ public class CellController : MonoBehaviour
             SetTurnText(CellModel.Instance.numberNextPlayer = 2);
             checkTurnCell.Status = 1;
 
-            //CallFind(1);
         }
         else if (checkTurnCell.CheckTurn == false)
         {
@@ -54,9 +60,9 @@ public class CellController : MonoBehaviour
             SetTurnText(CellModel.Instance.numberNextPlayer = 1);
             checkTurnCell.Status = 2;
 
-            //CallFind(2);
         }
         checkTurnCell.CheckTurn = true;
+        CellModel.Instance.countingOfMoves++;
     }
 
     private void SetTurnText(int turn)
@@ -117,11 +123,17 @@ public class CellController : MonoBehaviour
         directionsToWin.Add(new Vector2(0, -1));
         directionsToWin.Add(new Vector2(1, -1));
 
+
         foreach (var direction in directionsToWin)
         {
-            checkDirection = direction;
-            StartFindWin(checkTurnCell);
+            if (CellModel.Instance.dontWin == true)
+            {
+                checkDirection = direction; 
+                StartFindWin(checkTurnCell);
+            }
+           
         }
+
 
     }
 
@@ -147,11 +159,14 @@ public class CellController : MonoBehaviour
                 Vector3 line1 = CellModel.Instance.allCells[(int)start.x, (int)start.y].transform.position;//Линия
                 Vector3 line2 = CellModel.Instance.allCells[(int)secondStep.x, (int)secondStep.y].transform.position;
                 Vector3[] tor = new Vector3[2] { line1, line2 };
-                var linia = LineRenderer.Instantiate(CellModel.Instance.SinpleLine).GetComponent<LineRenderer>();
+                var linia = LineRenderer.Instantiate(CellModel.Instance.simpleLine).GetComponent<LineRenderer>();
                 linia.SetPositions(tor);
 
-                CountWined(checkTurnCell.Status);
                 StopGame();
+                CellModel.Instance.dial.SetActive(true);
+                CountWined(checkTurnCell.Status);
+                CellModel.Instance.countingOfMoves = 0;
+                CellModel.Instance.dontWin = false;
                 return;
             }
             else if ((backStep.x > -1 && backStep.x < row && backStep.y > -1 && backStep.y < column) && (CellModel.Instance.allCells[(int)backStep.x, (int)backStep.y].GetComponent<Cell>().Status == checkTurnCell.Status))
@@ -161,11 +176,15 @@ public class CellController : MonoBehaviour
                 Vector3 line1 = CellModel.Instance.allCells[(int)firstStep.x, (int)firstStep.y].transform.position;//Линия
                 Vector3 line2 = CellModel.Instance.allCells[(int)backStep.x, (int)backStep.y].transform.position;
                 Vector3[] tor = new Vector3[2] { line1, line2 };
-                var linia = LineRenderer.Instantiate(CellModel.Instance.SinpleLine).GetComponent<LineRenderer>();
+                var linia = LineRenderer.Instantiate(CellModel.Instance.simpleLine).GetComponent<LineRenderer>();
                 linia.SetPositions(tor);
 
-                CountWined(checkTurnCell.Status);
                 StopGame();
+                CellModel.Instance.dial.SetActive(true);
+                CountWined(checkTurnCell.Status);
+                CellModel.Instance.countingOfMoves = 0;
+                CellModel.Instance.dontWin = false;
+
                 return;
             }
         }
@@ -208,9 +227,9 @@ public class CellController : MonoBehaviour
     public void WriteToCount(int crosszero)
     {
         if (crosszero == 1)
-        CellModel.Instance.textCross.text = $"Cross {CellModel.Instance.crosswWinnes}";
-        else if(crosszero == 2)
-        CellModel.Instance.textZero.text = $"Zero {CellModel.Instance.zeroWinnes}";
+            CellModel.Instance.textCross.text = $"Cross {CellModel.Instance.crosswWinnes}";
+        else if (crosszero == 2)
+            CellModel.Instance.textZero.text = $"Zero {CellModel.Instance.zeroWinnes}";
         else
         {
             CellModel.Instance.textCross.text = $"Cross {CellModel.Instance.crosswWinnes}";
@@ -219,14 +238,21 @@ public class CellController : MonoBehaviour
     }
     public void NewRound()
     {
-        Destroy(FindObjectOfType <LineRenderer>());
+
         foreach (var item in CellModel.Instance.allCells)
         {
             Destroy(item);
-            
+
         }
         CreateAllCells(row, column);
         SetTurnText(CellModel.Instance.numberNextPlayer);
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Linetag").Length; i++)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Linetag"));
+        }
+        CellModel.Instance.dontWin = true;
+
+        //CountWined(CellModel.Instance.targetCell.GetComponent<Cell>().Status);
     }
     public void RestartGame()
     {
@@ -234,9 +260,28 @@ public class CellController : MonoBehaviour
         CountWined(0);
         CellModel.Instance.numberNextPlayer = 1;
         SetTurnText(CellModel.Instance.numberNextPlayer);
-
+        CellModel.Instance.countingOfMoves = 0;
+        CellModel.Instance.dial.SetActive(false);
     }
+    public void CountingOfMoves()
+    {
 
+        if (CellModel.Instance.numOfMoves == CellModel.Instance.countingOfMoves)
+        {
+            CellModel.Instance.dontWin = true;
+            CellModel.Instance.countingOfMoves = 0;
+            StopGame();
+
+            if (CellModel.Instance.dontWin == true)
+            {
+                CellModel.Instance.textTurns.text = "No winner";
+                CellModel.Instance.dial.SetActive(true);
+
+            }
+            else CellModel.Instance.dial.SetActive(true);
+
+        }
+    }
 
 
     //public float ClculateCellHorisontal()
