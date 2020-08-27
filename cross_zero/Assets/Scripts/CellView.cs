@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
+
 using UnityEngine;
 
 public class CellView : MonoBehaviour
@@ -11,6 +11,24 @@ public class CellView : MonoBehaviour
     {
         _cellController = new CellController();
     }
+    private void Update()
+    {
+        var hit = new RaycastHit();
+
+        for (int i = 0; i < Input.touchCount; ++i)
+        {
+            if (Input.GetTouch(i).phase.Equals(TouchPhase.Began))
+            {
+                // Construct a ray from the current touch coordinates.
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    hit.transform.gameObject.SendMessage("OnMouseDown");
+                }
+            }
+        }
+    }
     private void OnMouseDown()
     {
         CellModel.Instance.targetCell = gameObject;
@@ -19,7 +37,7 @@ public class CellView : MonoBehaviour
         _cellController.MakeMove();
         _cellController.DirectionsToWin();
         _cellController.CountingOfMoves();
-        
-        Debug.Log("тык"); 
+
+        Debug.Log("тык");
     }
 }

@@ -14,16 +14,6 @@ public class CellController : MonoBehaviour
     private int row;
     private int column;
 
-
-    //private void OnMouseDown()
-    //{
-    //    CellModel.Instance.targetCell = gameObject;
-
-
-    //    MakeMove();
-
-    //    Debug.Log(CellModel.Instance.numberPlayer);
-    //}
     private void Awake()
     {
         row = CellModel.Instance.row;
@@ -282,110 +272,5 @@ public class CellController : MonoBehaviour
 
         }
     }
-
-
-    //public float ClculateCellHorisontal()
-    //{
-    //    var RectCell1 = CellModel.Instance.allCells[0, 0].GetComponent<RectTransform>().position;
-    //    var RectCell2 = CellModel.Instance.allCells[0, 1].GetComponent<RectTransform>().position;
-    //    return Math.Abs(Vector3.Distance(RectCell1, RectCell2));
-    //}
-
-    //public float ClculateCellDiagonal()
-    //{
-    //    var h = ClculateCellHorisontal();
-    //    return (float)Math.Abs(Math.Sqrt(h * h + h * h));
-    //}
-
-
-
-
-    //public List<GameObject> CallFindAround(int numRow, int numColumn) //Метод ищет в окружности клетки, если значения строк и колонок не нарушены по фактическому расположению
-    //{
-    //    GameObject[,] allCells = CellModel.Instance.allCells;
-    //    row = CellModel.Instance.row;
-    //    column = CellModel.Instance.column;
-
-    //    List<GameObject> listAround = new List<GameObject>();
-    //    if ((numRow + 1 >= 0 && numColumn + 0 >= 0)&&(numRow + 1 < row && numColumn + 0 < column)) listAround.Add(allCells[numRow + 1, numColumn + 0]);
-    //    if ((numRow + 1 >= 0 && numColumn + 1 >= 0)&& (numRow + 1 < row && numColumn + 1 < column)) listAround.Add(allCells[numRow + 1, numColumn + 1]);
-    //    if ((numRow + 0 >= 0 && numColumn + 1 >= 0)&& (numRow + 0 < row && numColumn + 1 < column)) listAround.Add(allCells[numRow + 0, numColumn + 1]);
-    //    if ((numRow - 1 >= 0 && numColumn + 1 >= 0)&& (numRow - 1 < row && numColumn + 1 < column)) listAround.Add(allCells[numRow - 1, numColumn + 1]);
-    //    if ((numRow - 1 >= 0 && numColumn + 0 >= 0)&& (numRow - 1 < row && numColumn + 0 < column)) listAround.Add(allCells[numRow - 1, numColumn + 0]);
-    //    if ((numRow - 1 >= 0 && numColumn - 1 >= 0)&& (numRow - 1 < row && numColumn - 1 < column)) listAround.Add(allCells[numRow - 1, numColumn - 1]);
-    //    if ((numRow + 0 >= 0 && numColumn - 1 >= 0)&& (numRow + 0 < row && numColumn - 1 < column)) listAround.Add(allCells[numRow + 0, numColumn - 1]);
-    //    if ((numRow + 1 >= 0 && numColumn - 1 >= 0)&& (numRow + 1 < row && numColumn - 1 < column)) listAround.Add(allCells[numRow + 1, numColumn - 1]);
-
-    //    return listAround;
-    //}
-    //public void CounterToWin()
-    //{
-    //    int targetRow = checkTurnCell.rowCell;
-    //    int targetColumn = checkTurnCell.columnCell;
-    //    //int targetColumn = CellModel.Instance.targetCell.GetComponent<Cell>().columnCell;
-    //    List<GameObject> firstList = CallFindAround(targetRow, targetColumn);
-    //    foreach (var el in firstList)
-    //    {
-    //        if (el.GetComponent<Cell>().Status == checkTurnCell.Status)
-    //        {
-    //            Debug.Log("Есть пара");
-    //            var to = new Vector2(el.GetComponent<Cell>().rowCell - targetRow, el.GetComponent<Cell>().columnCell - targetColumn);
-    //            var into = new Vector2(el.GetComponent<Cell>().rowCell, el.GetComponent<Cell>().columnCell);
-    //            Debug.Log(to);
-    //            var win = into + to;
-    //            if (CellModel.Instance.allCells[(int)win.x, (int)win.y].GetComponent<Cell>().Status == el.GetComponent<Cell>().Status)Debug.Log("победа");
-
-    //        }
-    //    }
-
-    //}
-
-
-    //public void CallFind(int status)
-    //{
-    //    float h = ClculateCellHorisontal();
-    //    var targetPos = CellModel.Instance.targetCell.GetComponent<RectTransform>().position;
-
-    //    List<Vector3> coord = new List<Vector3>();
-    //    coord.Add(new Vector3(h, 0, 0));
-    //    coord.Add(new Vector3(h, h, 0));
-    //    coord.Add(new Vector3(0, h, 0));
-    //    coord.Add(new Vector3(-h, h, 0));
-    //    coord.Add(new Vector3(-h, 0, 0));
-    //    coord.Add(new Vector3(-h, -h, 0));
-    //    coord.Add(new Vector3(0, -h, 0));
-    //    coord.Add(new Vector3(h, -h, 0));
-
-    //    foreach (var vect in coord)
-    //    {
-    //       Vector3 vectPos = vect + targetPos;
-    //        foreach (var cell in CellModel.Instance.allCells)
-    //        {
-    //            Vector3 cellPos = cell.GetComponent<RectTransform>().position;
-    //            int stat = cell.GetComponent<Cell>().Status;
-    //            if (cellPos == vectPos && stat == status)
-    //            {
-    //                Debug.Log("две нашел");
-    //                Vector3 winPos = cellPos + vect;
-    //                Vector3 winPos2 = targetPos + new Vector3(vect.x * -1, vect.y * -1, vect.z * -1);
-    //                foreach (var el in CellModel.Instance.allCells)
-    //                {
-    //                    int stat2 = el.GetComponent<Cell>().Status;
-    //                    if (el.GetComponent<RectTransform>().position == winPos && stat2 == status || el.GetComponent<RectTransform>().position == winPos2 && stat2 == status)
-    //                    {
-
-    //                        Debug.Log("победа");
-
-    //                        Vector3[] tor = new Vector3[3] { targetPos, cellPos, winPos };
-    //                        var linia = LineRenderer.Instantiate(CellModel.Instance.SinpleLine).GetComponent<LineRenderer>();
-    //                        linia.SetPositions(tor);
-    //                       return;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //}
 }
 

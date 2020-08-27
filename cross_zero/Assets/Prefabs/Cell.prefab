@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3234603079569830982}
   - component: {fileID: 3234603079569830843}
   - component: {fileID: 3234603079569830980}
-  - component: {fileID: 1199979016197473367}
+  - component: {fileID: 8434141353513709835}
   - component: {fileID: 1308433570098610731}
   m_Layer: 0
   m_Name: Cell
@@ -115,7 +115,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1199979016197473367
+--- !u!114 &8434141353513709835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,3 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CheckTurn: 0
+  Status: 0
+  columnCell: 0
+  rowCell: 0
